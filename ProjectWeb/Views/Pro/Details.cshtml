@@ -1,0 +1,138 @@
+﻿@model ProjectWeb.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_DanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_DanhMuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaGoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaGoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Video)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Video)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnhGame)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnhGame)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnhGame1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnhGame1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnhGame2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnhGame2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tags)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_SanPham }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjectWeb.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_DanhMuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaGoc)
+        </th>
+
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_DanhMuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSanPham)
+        </td>
+        <td>
+            <img src=" @Html.DisplayFor(modelItem => item.HinhAnh)" alt="user" class="rounded"
+                 width="40">        
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaSanPham)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaGoc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_SanPham }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_SanPham }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_SanPham })
+        </td>
+    </tr>
+}
+
+</table>

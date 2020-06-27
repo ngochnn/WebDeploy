@@ -1,0 +1,10 @@
+﻿@model List<ProjectWeb.Models.Category>
+<h1>Categories</h1>
+<ul>
+    @foreach (var danhmuc in Model)
+    {
+        @*<li><a href="#">@danhmuc.TenDanhMuc</a></li>*@
+        <li>@Html.ActionLink(@danhmuc.TenDanhMuc, "ListProduct", "Product", new { Iddanhmuc = danhmuc.ID_DanhMuc }, null)</li>
+    }
+</ul>
+

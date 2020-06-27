@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbshopgameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID_Account" />
+          </Key>
+          <Property Name="ID_Account" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="SĐT" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Quyen" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="ID_DanhMuc" />
+          </Key>
+          <Property Name="ID_DanhMuc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenDanhMuc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DetailsOrder">
+          <Key>
+            <PropertyRef Name="ID_CTDonHang" />
+          </Key>
+          <Property Name="ID_CTDonHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_SanPham" Type="int" Nullable="false" />
+          <Property Name="ID_DonHang" Type="int" Nullable="false" />
+          <Property Name="SoLuongMua" Type="int" />
+          <Property Name="GiaBan" Type="int" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID_DonHang" />
+          </Key>
+          <Property Name="ID_DonHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Account" Type="int" />
+          <Property Name="Ngay" Type="date" />
+          <Property Name="TongTien" Type="int" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_SanPham" />
+          </Key>
+          <Property Name="ID_SanPham" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_DanhMuc" Type="int" />
+          <Property Name="TenSanPham" Type="nvarchar" MaxLength="50" />
+          <Property Name="HinhAnh" Type="nvarchar(max)" />
+          <Property Name="MaSanPham" Type="nvarchar" MaxLength="50" />
+          <Property Name="GiaGoc" Type="int" />
+          <Property Name="Sale" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
+          <Property Name="Video" Type="nvarchar(max)" />
+          <Property Name="HinhAnhGame" Type="nvarchar(max)" />
+          <Property Name="HinhAnhGame1" Type="nvarchar(max)" />
+          <Property Name="HinhAnhGame2" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="MoTa1" Type="nvarchar(max)" />
+          <Property Name="MoTa2" Type="nvarchar(max)" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_DetailsOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID_DonHang" />
+            </Principal>
+            <Dependent Role="DetailsOrder">
+              <PropertyRef Name="ID_DonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailsOrder_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_SanPham" />
+            </Principal>
+            <Dependent Role="DetailsOrder">
+              <PropertyRef Name="ID_SanPham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID_Account" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbshopgameModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailsOrder" EntityType="Self.DetailsOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetailsOrder_Order" Association="Self.FK_DetailsOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="DetailsOrder" EntitySet="DetailsOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailsOrder_Product" Association="Self.FK_DetailsOrder_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="DetailsOrder" EntitySet="DetailsOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Account" Association="Self.FK_Order_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbshopgameModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID_Account" />
+          </Key>
+          <Property Name="ID_Account" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SĐT" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Quyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Account" FromRole="Account" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_DanhMuc" />
+          </Key>
+          <Property Name="ID_DanhMuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDanhMuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DetailsOrder">
+          <Key>
+            <PropertyRef Name="ID_CTDonHang" />
+          </Key>
+          <Property Name="ID_CTDonHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_SanPham" Type="Int32" Nullable="false" />
+          <Property Name="ID_DonHang" Type="Int32" Nullable="false" />
+          <Property Name="SoLuongMua" Type="Int32" />
+          <Property Name="GiaBan" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_DetailsOrder_Order" FromRole="DetailsOrder" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_DetailsOrder_Product" FromRole="DetailsOrder" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID_DonHang" />
+          </Key>
+          <Property Name="ID_DonHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Account" Type="Int32" />
+          <Property Name="Ngay" Type="DateTime" Precision="0" />
+          <Property Name="TongTien" Type="Int32" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Order_Account" FromRole="Order" ToRole="Account" />
+          <NavigationProperty Name="DetailsOrders" Relationship="Self.FK_DetailsOrder_Order" FromRole="Order" ToRole="DetailsOrder" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_SanPham" />
+          </Key>
+          <Property Name="ID_SanPham" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_DanhMuc" Type="Int32" />
+          <Property Name="TenSanPham" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaSanPham" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiaGoc" Type="Int32" />
+          <Property Name="Sale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhGame" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhGame1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhGame2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DetailsOrders" Relationship="Self.FK_DetailsOrder_Product" FromRole="Product" ToRole="DetailsOrder" />
+        </EntityType>
+        <Association Name="FK_Order_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID_Account" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailsOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID_DonHang" />
+            </Principal>
+            <Dependent Role="DetailsOrder">
+              <PropertyRef Name="ID_DonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailsOrder_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_SanPham" />
+            </Principal>
+            <Dependent Role="DetailsOrder">
+              <PropertyRef Name="ID_SanPham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbshopgameEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="DetailsOrders" EntityType="Self.DetailsOrder" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <AssociationSet Name="FK_Order_Account" Association="Self.FK_Order_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailsOrder_Order" Association="Self.FK_DetailsOrder_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="DetailsOrder" EntitySet="DetailsOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailsOrder_Product" Association="Self.FK_DetailsOrder_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="DetailsOrder" EntitySet="DetailsOrders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbshopgameModelStoreContainer" CdmEntityContainer="dbshopgameEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="dbshopgameModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID_Account" ColumnName="ID_Account" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SĐT" ColumnName="SĐT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Quyen" ColumnName="Quyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="dbshopgameModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="ID_DanhMuc" ColumnName="ID_DanhMuc" />
+                <ScalarProperty Name="TenDanhMuc" ColumnName="TenDanhMuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailsOrders">
+            <EntityTypeMapping TypeName="dbshopgameModel.DetailsOrder">
+              <MappingFragment StoreEntitySet="DetailsOrder">
+                <ScalarProperty Name="ID_CTDonHang" ColumnName="ID_CTDonHang" />
+                <ScalarProperty Name="ID_SanPham" ColumnName="ID_SanPham" />
+                <ScalarProperty Name="ID_DonHang" ColumnName="ID_DonHang" />
+                <ScalarProperty Name="SoLuongMua" ColumnName="SoLuongMua" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="dbshopgameModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID_DonHang" ColumnName="ID_DonHang" />
+                <ScalarProperty Name="ID_Account" ColumnName="ID_Account" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="dbshopgameModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID_SanPham" ColumnName="ID_SanPham" />
+                <ScalarProperty Name="ID_DanhMuc" ColumnName="ID_DanhMuc" />
+                <ScalarProperty Name="TenSanPham" ColumnName="TenSanPham" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
+                <ScalarProperty Name="GiaGoc" ColumnName="GiaGoc" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="HinhAnhGame" ColumnName="HinhAnhGame" />
+                <ScalarProperty Name="HinhAnhGame1" ColumnName="HinhAnhGame1" />
+                <ScalarProperty Name="HinhAnhGame2" ColumnName="HinhAnhGame2" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="MoTa1" ColumnName="MoTa1" />
+                <ScalarProperty Name="MoTa2" ColumnName="MoTa2" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

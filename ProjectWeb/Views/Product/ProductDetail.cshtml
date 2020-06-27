@@ -1,0 +1,64 @@
+﻿@model  ProjectWeb.Models.Product
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+@*<h2>ProductDetail</h2>*@
+<p>@Model.ID_SanPham <span> @Model.TenSanPham </span> </p>
+
+
+<div id="templatemo_content_right">
+
+    <h1>@Model.TenSanPham@*<span>(by author name)</span>*@</h1>
+    <div class="image_panel">
+        <img src="@Model.HinhAnh" alt="CSS Template" width="100" height="150">
+    </div>
+    <h2><span> Mã sản phẩm: </span>@Model.MaSanPham</h2>
+
+    <ul>
+        <li> Tags: <a href="#">@Model.Tags</a></li>
+        @*<li style="font-size:12pt;" data-mce-style="font-size: 12pt;"><span> Mã sản phẩm: </span>@Model.MaSanPham</li>*@
+        <br />
+        <li @*style="font-size:12pt;" data-mce-style="font-size: 12pt;"*@><span> Giá bán: </span>@Model.GiaGoc</li>
+        <br />
+        <li style="color:chartreuse"><span> Tình trạng: </span>@Model.TinhTrang</li>
+        <br />
+    </ul>
+
+    <br />
+    <p @*style="font-size:12pt;"*@><span> Mô tả: </span>@Model.MoTa</p>
+    <br />
+
+
+
+
+    <p style="text-align: center;" data-mce-style="text-align: center;">
+        <img src="@Model.HinhAnhGame" width="50%" height="50%" />
+        <br />
+
+    <p> @Model.MoTa1</p>
+
+    <br />
+
+    <p style="text-align: center;" data-mce-style="text-align: center;">
+        <img src="@Model.HinhAnhGame1" width="50%" height="50%" />
+        <br />
+
+    <p> @Model.MoTa2</p>
+
+    <br />
+
+    <p style="text-align: center;" data-mce-style="text-align: center;">
+        <img src="@Model.HinhAnhGame2" width="50%" height="50%" />
+        <br />
+
+</div>
+
+<div class="video-wrapper">
+    <p style="text-align: center;">
+        <iframe src="@Model.Video" allowfullscreen="allowfullscreen" width="560" height="314" frameborder="0" id="rEz5CnEPgps">
+        </iframe>
+    </p>
+</div>
+
+<div class="cleaner_with_height">&nbsp;</div>

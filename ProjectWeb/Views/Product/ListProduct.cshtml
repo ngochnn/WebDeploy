@@ -1,0 +1,61 @@
+﻿@model List<ProjectWeb.Models.Product>
+@{
+    ViewBag.Title = "ListProduct";
+}
+
+@*<h2>ListProduct</h2>*@
+@for (int i = 1; i <= Model.Count(); i++)
+{
+    if (i % 2 != 0)
+    {
+        @Html.Raw("<div class='templatemo_product_box'>")
+        <h1 style="text-align: center;">@Model[i - 1].TenSanPham </h1>
+        <img src="@Model[i-1].HinhAnh" alt="#" width="30%" height="60%">
+        <div class="product_info">
+            <p>@Model[i - 1].MaSanPham</p>
+            <h3>@Model[i - 1].GiaGoc</h3>
+            <div class="buy_now_button"><a href='@Url.Action("AddItem","Cart",new { Idsp = Model[i-1].ID_SanPham })'>Buy Now</a></div>
+            <div class="detail_button"><a href='@Url.Action("ProductDetail", "Product", new { Iddetail = Model[i - 1].ID_SanPham })'>Detail</a></div>
+        </div>
+        <div class="cleaner">&nbsp;</div>
+        @Html.Raw("</div>")
+
+        <div class="cleaner_with_width">&nbsp;</div>
+
+    }
+    else if (i % 2 != 0 && i == Model.Count)
+    {
+        @Html.Raw("<div class='templatemo_product_box'>")
+        <h1 style="text-align: center;">@Model[i - 1].TenSanPham </h1>
+        <img src="@Model[i-1].HinhAnh" alt="#" width="30%" height="60%">
+        <div class="product_info">
+            <p>@Model[i - 1].MaSanPham</p>
+            <h3>@Model[i - 1].GiaGoc</h3>
+            <div class="buy_now_button"><a href='@Url.Action("AddItem","Cart",new { Idsp = Model[i-1].ID_SanPham })'>Buy Now</a></div>
+            <div class="detail_button"><a href='@Url.Action("ProductDetail","Product",new { Iddetail=Model[i-1].ID_SanPham})'>Detail</a></div>
+        </div>
+
+        <div class="cleaner">&nbsp;</div>
+        @Html.Raw("</div>")
+        <div class="cleaner_with_height">&nbsp;</div>
+
+    }
+    else
+    {
+        @Html.Raw("<div class='templatemo_product_box'>")
+        <h1 style="text-align: center;">@Model[i - 1].TenSanPham </h1>
+        <img src="@Model[i-1].HinhAnh" alt="#" width="30%" height="60%">
+        <div class="product_info">
+            <p>@Model[i - 1].MaSanPham</p>
+            <h3>@Model[i - 1].GiaGoc</h3>
+            <div class="buy_now_button"><a href='@Url.Action("AddItem","Cart",new { Idsp = Model[i-1].ID_SanPham })'>Buy Now</a></div>
+            <div class="detail_button"><a href='@Url.Action("ProductDetail","Product",new { Iddetail=Model[i-1].ID_SanPham})'>Detail</a></div>
+        </div>
+        <div class="cleaner">&nbsp;</div>
+        @Html.Raw("</div>")
+
+        <div class="cleaner_with_height">&nbsp;</div>
+    }
+}
+
+<a href="index.html"><img src="//theme.hstatic.net/1000231532/1000430083/14/home_bannertop.png?v=82" alt="css template ad" width="100%"></a>

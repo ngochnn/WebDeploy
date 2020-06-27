@@ -1,0 +1,51 @@
+﻿@model List<ProjectWeb.Models.Cart>
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+<h1>Shopping cart</h1>
+<table class="table">
+    <tr>
+        <th>Sản phẩm</th>
+        <th>Mô tả</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Tống</th>
+        <th>Lựa chọn</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.HinhAnh" alt="#" width="150" height="160">
+            </td>
+            <td>@item.TenSanPham</td>
+            <td>@item.GiaGoc</td>
+            <td>
+
+
+                <input type="number" name="quantity" value="@item.SoLuong" size="2">
+
+
+            </td>
+            @*<td>@item.GiaGoc.GetValueOrDefault(0)</td>*@
+            <td>@(item.GiaGoc * item.SoLuong)</td>
+            <td><a href="@Url.Action("Deleted",new { SPID = item.ID_SanPham})" class="current">Xóa</a></td>
+
+        </tr>
+    }
+</table>
+
