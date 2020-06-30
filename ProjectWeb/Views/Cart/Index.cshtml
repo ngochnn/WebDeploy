@@ -1,4 +1,4 @@
-﻿@model List<ProjectWeb.Models.Cart>
+@model List<ProjectWeb.Models.Cart>
 @{
     ViewBag.Title = "Index";
 }
@@ -34,18 +34,23 @@
             </td>
             <td>@item.TenSanPham</td>
             <td>@item.GiaGoc</td>
-            <td>
-
-
-                <input type="number" name="quantity" value="@item.SoLuong" size="2">
-
-
+            <td style="width:130px">
+                <form action="@Url.Action("Updated",new { id = item.ID_SanPham})" method="get">
+                    <input type="hidden" name="IDSP" value="@item.ID_SanPham" />
+                    <input type="number" min="1" step="1" name="Soluongmoi" class="txtQuantity" data-id="@item.ID_SanPham" style="height: 20px; width:50px" value="@item.SoLuong" />
+                    <button type="submit" class="btn btn-primary btn-sm"> Cập nhật </button>
+                </form>
             </td>
             @*<td>@item.GiaGoc.GetValueOrDefault(0)</td>*@
             <td>@(item.GiaGoc * item.SoLuong)</td>
             <td><a href="@Url.Action("Deleted",new { SPID = item.ID_SanPham})" class="current">Xóa</a></td>
 
         </tr>
-    }
+        <tr>
+
+            <td> <p style="text-align:right">Total:</p></td>
+            <td><p class="cart_total_price">@Model.Sum(m => m.ThanhTien)</p></td>
+        </tr>
+        }
 </table>
 
