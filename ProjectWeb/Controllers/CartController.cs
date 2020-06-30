@@ -118,6 +118,18 @@ namespace ProjectWeb.Controllers
             return RedirectToAction("Index", "Cart");
 
         }
+                public ActionResult Updated(int id, int Soluongmoi)
+        {
+            // tìm carditem muon sua
+            List<Cart> gioHang = Session["CartSession"] as List<Cart>;
+            Cart itemSua = gioHang.FirstOrDefault(m => m.ID_SanPham == id);
+            if (itemSua != null)
+            {
+                itemSua.SoLuong = Soluongmoi;
+            }
+            return RedirectToAction("Index");
+
+        }
 
     }
 }
